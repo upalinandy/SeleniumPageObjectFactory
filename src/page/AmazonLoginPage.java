@@ -3,37 +3,45 @@ package page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AmazonLoginPage {
 	WebDriver driver;
 	WebDriverWait dynamicwait;
-	By signin = By.id("nav-link-yourAccount");
-	By email = By.id("ap_email");
-	By password = By.id("ap_password");
-	By go = By.id("signInSubmit");
 	
 	public AmazonLoginPage(WebDriver driver, WebDriverWait dynamicwait){
 		this.driver = driver;
 		this.dynamicwait = dynamicwait;
+		PageFactory.initElements(driver, this);
 	}
-			
+	
+	@FindBy(id = "nav-link-yourAccount")
+	WebElement signin;
+	@FindBy(id = "ap_email")
+	WebElement email;
+	@FindBy(id = "ap_password")
+	WebElement password;
+	@FindBy(id = "signInSubmit")
+	WebElement go;
+	
 	public WebElement SignInLink(){
-			return driver.findElement(signin);
+			return signin;
 		}
 		
 	public WebElement EmailId(){
-		dynamicwait.until(ExpectedConditions.presenceOfElementLocated(email));
-		return driver.findElement(email);
+		dynamicwait.until(ExpectedConditions.presenceOfElementLocated(By.id("ap_email")));
+		return email;
 	}
 	
 	public WebElement Passwd(){
-		return driver.findElement(password);
+		return password;
 	}
 	
 	public WebElement Submit(){
-		return driver.findElement(go);
+		return go;
 	}
 
 	
